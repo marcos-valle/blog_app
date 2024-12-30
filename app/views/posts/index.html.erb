@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Posts" %>
+
+<h1>Posts</h1>
+
+<div id="posts">
+  <!-- Paginação (3 posts por página) -->
+  <% @posts.page(params[:page]).per(3).each do |post| %>
+  <div class="post">
+    <!-- Criando um link para o post -->
+    <h2><%= link_to post.title, post_path(post) %></h2>
+    <!-- Exibindo o conteúdo do post em até 150 caracteres -->
+    <p><%= truncate(post.content, length: 150) %></p>
+    <!--  -->
+    <p><%= link_to 'Read more...', post_path(post) %></p>
+  </div>
+<% end %>
+
+<%= paginate @posts %> <!-- Usando o método correto da gem kaminari -->
+
+  
+</div>
+
+<%= link_to "New post", new_post_path %>

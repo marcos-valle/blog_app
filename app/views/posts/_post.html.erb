@@ -1,17 +1,20 @@
 <div id="<%= dom_id post %>">
+  <h1>
+    <strong><%= post.title %></strong>
+    
+  </h1>
+
   <p>
-    <strong>Title:</strong>
-    <%= post.title %>
+    <strong>Autor:</strong>
+    <%= post.username %>
+  </p>
+  
+  <p>
+    <strong>Publicado em:</strong>
+    <%= post.created_at.strftime("%d/%m/%Y") %>
   </p>
 
   <p>
-    <strong>Content:</strong>
     <%= post.content %>
   </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= post.user_id %>
-  </p>
-
 </div>

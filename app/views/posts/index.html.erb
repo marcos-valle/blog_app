@@ -17,9 +17,10 @@
   </div>
 <% end %>
 
-<%= paginate @posts %> <!-- Usando o método correto da gem kaminari -->
+<%= paginate @posts %> 
 
   
 </div>
-
-<%= link_to "New post", new_post_path %>
+  <% if user_signed_in?%>
+    <%= link_to "New post", new_post_path %>
+  <% end %>

@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+# pin "rails-ujs", to: "rails-ujs.js"
+
+require_relative "../config/application"
+require "importmap/commands"

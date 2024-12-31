@@ -3,8 +3,28 @@
 <%= render @post %>
 
 <div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <!-- Somente o autor do post pode editar e deletar -->
+  <% if user_signed_in? && current_user == @post.user %>
+    <%= link_to "Delete this post", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= link_to "Edit this post", edit_post_path(@post) %>   
+  <% end %>
   <%= link_to "Back to posts", posts_path %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
-</div>
+  <h2>Comentários</h2>
+  <%= form_with(model: [@post, Comment.new]) do |form| %>
+    <div>
+      <%= form.label :content, style: "display: block" %>
+      <%= form.text_area :content, rows: 5 %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+
+  <h3>Comentários</h3>
+  <% @post.comments.each do |comment| %>
+    <div>
+      
+      <p><strong>@<%= comment.user ? comment.user.username : "Anônimo" %></strong>: <%= comment.content %></p>
+    </div>
+  <% end %>

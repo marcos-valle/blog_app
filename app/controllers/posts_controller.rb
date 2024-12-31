@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(3) # Limita a 3 posts por página
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(3) # Limita a 3 posts por página e ordena a partir do mais recente
   end
 
   # GET /posts/1 or /posts/1.json
@@ -65,6 +65,10 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :title, :content, :user_id ])
+      if current_user
+        params[:post][:user_id] = current_user.id
+        params[:post][:username] = current_user.username
+      end
+      params.expect(post: [ :title, :content, :user_id, :username ])
     end
 end

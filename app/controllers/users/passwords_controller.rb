@@ -12,9 +12,10 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
+  def edit
+    Rails.logger.debug "Edit password token: #{params[:reset_password_token]}"
+    super
+  end
 
   # PUT /resource/password
   # def update

@@ -25,6 +25,6 @@
   <% @post.comments.each do |comment| %>
     <div>
       
-      <p><strong>@<%= comment.user ? comment.user.username : "Anônimo" %></strong>: <%= comment.content %></p>
+      <p><strong>@<%= comment.user.username %></strong>: <%= comment.content %></p>
     </div>
   <% end %>

@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      rails-ujs:
+        specifier: 5.2.8-1
+        version: 5.2.8-1
+
+packages:
+
+  rails-ujs@5.2.8-1:
+    resolution: {integrity: sha512-1Xfgv21r3Ira7sgepnvLD546q8hm/uIokK7Ocoi4uLsXkT0HHg8vJaxKfBqbjdb24YeOGBily+jxfcAle7dMWA==}
+
+snapshots:
+
+  rails-ujs@5.2.8-1: {}

@@ -20,7 +20,8 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload" %> 
+    <%# <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
 
   </head>
 
@@ -29,8 +30,8 @@
     <header>
       <% if user_signed_in? %>
         <p>Olá, <%= "@#{current_user.username}" %>!</p>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-        <%= link_to "Edit Account"%>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete, data: {confirm: "Tem certeza?"}%>
+        <%= link_to "Edit Account", edit_user_registration_path %>
       <% else %>
         <%= link_to "Login", new_user_session_path %>
         <%= link_to "Sign up", new_user_registration_path %>

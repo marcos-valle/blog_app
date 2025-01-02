@@ -19,6 +19,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Check Ruby version 
+        run: ruby -v
+
       - name: Ensure brakeman script is executable
         run: chmod +x bin/brakeman
 
@@ -38,6 +41,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Check Ruby version 
+        run: ruby -v
+
       - name: Ensure importmap script is executable
         run: chmod +x bin/importmap
 
@@ -55,6 +61,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Check Ruby version 
+        run: ruby -v
 
       - name: Ensure rubocop script is executable
         run: |
@@ -86,6 +95,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Check Ruby version 
+        run: ruby -v
+        
       - name: Run tests
         env:
           RAILS_ENV: test

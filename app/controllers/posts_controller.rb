@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(3) # Limita a 3 posts por página e ordena a partir do mais recente
+    # Limita a 3 posts por página e ordena a partir do mais recente
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
   end
 
   # GET /posts/1 or /posts/1.json

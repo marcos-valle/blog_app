@@ -76,12 +76,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    services:
+     redis:
+       image: postgres:latest
+       ports:
+         - 5432:5432
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }} 
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB_TEST }}
+        options: --health-cmd="pg_isready -U ${{ secrets.POSTGRES_USER }}" --health-interval=10s --health-timeout=5s --health-retries=5
+    
     steps:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git pkg-config google-chrome-stable
@@ -100,11 +105,12 @@ jobs:
 
       - name: Ensure bin/rails script is executable
         run: chmod +x bin/rails
-                
+
       - name: Run tests
         env:
           RAILS_ENV: test
           # REDIS_URL: redis://localhost:6379/0
+          DATABASE_URL: ${{ secrets.DATABASE_TEST_URL }}
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests

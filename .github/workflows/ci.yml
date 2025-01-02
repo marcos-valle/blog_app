@@ -97,7 +97,10 @@ jobs:
 
       - name: Check Ruby version 
         run: ruby -v
-        
+
+      - name: Ensure bin/rails script is executable
+        run: chmod +x bin/rails
+                
       - name: Run tests
         env:
           RAILS_ENV: test

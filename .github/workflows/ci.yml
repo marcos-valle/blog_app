@@ -100,11 +100,12 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Check Ruby version 
-        run: ruby -v
+      - name: Install dependencies
+        run: bundle install
 
-      - name: Ensure bin/rails script is executable
-        run: chmod +x bin/rails
+      - name: Load environment variables
+        run: |
+          echo "DATABASE_TEST_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB" >> $GITHUB_ENV
 
       - name: Run tests
         env:
@@ -113,6 +114,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_TEST_URL }}
         run: bin/rails db:test:prepare test test:system
 
+        
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
         if: failure()

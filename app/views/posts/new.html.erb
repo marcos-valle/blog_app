@@ -1,11 +1,13 @@
-<% content_for :title, "New post" %>
+<section class="sessionsPostSection">
+  <% content_for :title, "New post" %>
 
-<h1>New post</h1>
+  <h1>Novo Post</h1>
 
-<%= render "form", post: @post %>
+  <%= render "form", post: @post %>
 
-<br>
+  <br>
+</section>
 
-<div>
-  <%= link_to "Back to posts", posts_path %>
-</div>
+<section class="postActions">
+  <%= link_to "Voltar para posts", posts_path %>
+</section>

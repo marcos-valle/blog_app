@@ -1,0 +1,114 @@
+.sessionSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5rem 0;
+
+
+    h2 {
+      text-align: center;
+      color: var(--title-primary);
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0.5rem;
+    }
+  
+    .field {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      input {
+        display: inline-block;
+        width: 20%;
+        height: 1%;
+        font-size: small;
+        margin: 0.4rem 0;
+        padding: 0.75rem;
+        border: var(--text-gray) 1px solid;
+        border-radius: 8px;
+        background-color: #FFFFFF;
+        color: var(--text-dark);
+      }
+    }
+
+    .checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      input {
+        margin: 0;
+      }
+
+      label {
+        margin: 0;
+        font-size: small;
+      }
+    }
+
+    .actions {
+    display: flex;
+    justify-content: center;
+  
+    input {
+      padding: 0.75rem 1.5rem;
+      width: 20%;
+      font-weight: bold;
+      color: var(--text-light); /* Texto branco */
+      background-color: var(--text-highlight); /* Cor de destaque */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 0;
+      }
+    }
+
+    p {
+        margin: 0;
+        text-align: center;
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-size: small;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 3rem;
+
+        &:hover {
+          color: var(--text-highlight);
+        }
+    }
+
+    
+    .notSatisfy {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
+      p {
+          text-align: center;
+          color: var(--text-dark);
+          font-size: 0.8rem;
+        }
+      
+      button {
+        all: unset;
+        color: var(--text-gray);
+        font-weight: bold;
+        font-size: small;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+          color: red;
+        }	
+      }
+    }
+  }

@@ -1,20 +1,22 @@
-<div id="<%= dom_id post %>">
+<div class="eachPost" id="<%= dom_id post %>">
   <h1>
     <strong><%= post.title %></strong>
     
   </h1>
 
-  <p>
-    <strong>Autor:</strong>
-    <%= post.username %>
-  </p>
-  
-  <p>
-    <strong>Publicado em:</strong>
-    <%= post.created_at.strftime("%d/%m/%Y") %>
-  </p>
+  <div class="postsInfo">
+    <p>
+      <strong>Autor:</strong>
+      <%= post.username %>
+    </p>
+    
+    <p>
+      <strong>Publicado em:</strong>
+      <%= post.created_at.strftime("%d/%m/%Y") %>
+    </p>
+  </div>
 
   <p>
-    <%= post.content %>
+    <%= simple_format(post.content) %>
   </p>
 </div>

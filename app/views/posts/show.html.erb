@@ -1,30 +1,37 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice" style="color: green"><%= notice %></p>
 
-<%= render @post %>
+<div class="postPage">
+  <%= render @post %>
+</div>
 
-<div>
+<div class="postActions">
   <!-- Somente o autor do post pode editar e deletar -->
   <% if user_signed_in? && current_user == @post.user %>
-    <%= link_to "Delete this post", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
-    <%= link_to "Edit this post", edit_post_path(@post) %>   
+    <%= link_to "Apagar publicação", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= link_to "Editar publicação", edit_post_path(@post) %>   
   <% end %>
-  <%= link_to "Back to posts", posts_path %>
+  <%= link_to "Voltar", posts_path %>
+</div>
+  
+<section class="commentsSection">  
+  <div class="commentsSectionTitle">
+    <h2>Comente!</h2>
+  </div>
 
-  <h2>Comentários</h2>
   <%= form_with(model: [@post, Comment.new]) do |form| %>
-    <div>
-      <%= form.label :content, style: "display: block" %>
+    <div class="commentsField">
       <%= form.text_area :content, rows: 5 %>
     </div>
-    <div>
-      <%= form.submit %>
+    <div class="commentsActions">
+      <%= form.submit "Publicar"%>
     </div>
   <% end %>
 
-  <h3>Comentários</h3>
-  <% @post.comments.each do |comment| %>
-    <div>
-      
+  <div class="comments"> 
+    <% @post.comments.each do |comment| %> 
+    <div class="commentsInfo">
       <p><strong>@<%= comment.user.username %></strong>: <%= comment.content %></p>
     </div>
+  </div>
   <% end %>
+</section>

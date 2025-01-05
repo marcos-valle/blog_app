@@ -1,26 +1,27 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Posts" %>
+<% content_for :title, "Blog" %>
 
-<h1>Posts</h1>
+<div class="pageTitle">
+  <h1>Resenhas</h1>
+</div>
 
-<div id="posts">
+<div class="posts">
   <!-- Paginação (3 posts por página) -->
   <% @posts.page(params[:page]).per(3).each do |post| %>
   <div class="post">
-    <!-- Criando um link para o post -->
-    <h2><%= link_to post.title, post_path(post) %></h2>
+    <!-- Criando um link no título para o post -->
+    <h2 class="postTitle"><%= link_to post.title, post_path(post) %></h2>
     <!-- Exibindo o conteúdo do post em até 150 caracteres -->
-    <p><%= truncate(post.content, length: 150) %></p>
-    <!--  -->
-    <p><%= link_to 'Read more...', post_path(post) %></p>
+    <p class="truncateContent"><%= truncate(post.content, length: 150) %></p>
+    <!-- Criando um link no 'leia mais' para o post -->
+    <p class="readMore"><%= link_to 'LEIA MAIS...', post_path(post) %></p>
   </div>
-<% end %>
+  <% end %>
 
-<%= paginate @posts %> 
-
-  
+  <li class="pag"> <%= paginate @posts %> </li> <!-- Adicionando a paginação -->
 </div>
+
   <% if user_signed_in?%>
-    <%= link_to "New post", new_post_path %>
+    <li class="newPost"> <%= link_to "Novo post", new_post_path %> </li>
   <% end %>

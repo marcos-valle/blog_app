@@ -1,12 +1,16 @@
-<% content_for :title, "Editing post" %>
+<section class="sessionsPostSection">
+  <% content_for :title, "Editing post" %>
 
-<h1>Editing post</h1>
+  <h1>Editando post</h1>
+  
+  <div class="postFormSection">
+    <%= render "form", post: @post %>
+    
+    <br>
+</section>
 
-<%= render "form", post: @post %>
-
-<br>
-
-<div>
-  <%= link_to "Show this post", @post %> |
-  <%= link_to "Back to posts", posts_path %>
-</div>
+    <div class="postActions">
+      <%= link_to "Visualizar este post", @post %>
+      <%= link_to "Voltar para posts", posts_path %>
+    </div>
+  </div>

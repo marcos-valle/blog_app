@@ -6,27 +6,38 @@
   <h1>Publicações</h1>
 </div>
 
-<div class="posts">
-  <!-- Paginação (3 posts por página) -->
-  <% if params[:tag_names] %>
-    <h2>Filtrando por tag: <%= params[:tag_names] %></h2>
+<section class="filters">
+    <%= form_with url: posts_path, method: :get, local: true do %>
+    <h3>Filtros</h3>
+    <div class="filtersCheckbox">
+      <% Tag.order(:name).each do |tag| %>
+        <%= check_box_tag "tag_names[]", tag.name, params[:tag_names]&.include?(tag.name) %>
+        <%= label_tag "tag_names_#{tag.id}", tag.name %>
+      <% end %>
+    </div>
+    <div class="filtersButtons">
+      <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+      <%= link_to "Limpar Filtros", posts_path, class: "btn btn-secondary" %>
+    </div>
   <% end %>
+</section>
 
+<section class="posts">
   <% @posts.page(params[:page]).per(3).each do |post| %>
   <div class="post">
-    <!-- Criando um link no título para o post -->
+    <!-- Cria um link no título para o post -->
     <h2 class="postTitle"><%= link_to post.title, post_path(post) %></h2>
     <p>Tags: <%= post.tags.map(&:name).join(", ") %></p>
-    <!-- Exibindo o conteúdo do post em até 150 caracteres -->
+    <!-- Exibe o conteúdo do post em até 150 caracteres -->
     <p class="truncateContent"><%= truncate(post.content, length: 150) %></p>
-    <!-- Criando um link no 'leia mais' para o post -->
+    <!-- Cria um link no 'leia mais' para o post -->
     <p class="readMore"><%= link_to 'LEIA MAIS...', post_path(post) %></p>
   </div>
   <% end %>
 
-  <li class="pag"> <%= paginate @posts %> </li> <!-- Adicionando a paginação -->
-</div>
+  <li class="pag"> <%= paginate @posts %> </li>
+</section>
 
-  <% if user_signed_in?%>
-    <li class="newPost"> <%= link_to "Novo post", new_post_path %> </li>
-  <% end %>
+<% if user_signed_in?%>
+  <li class="newPost"> <%= link_to "Novo post", new_post_path %> </li>
+<% end %>

@@ -4,6 +4,24 @@
     justify-content: center;
     margin: 5rem 0;
 
+    .errorMsg {
+      all: unset;
+      text-decoration: none;
+      position: absolute;
+      top: 10%;
+
+      h2 {
+        margin: 0;
+        text-align: start;
+        color: red;
+        font-size: small;
+        font-weight: bold;
+      }
+      ul li {
+        color: red;
+        font-size: small;
+      }
+    }
 
     h2 {
       text-align: center;
@@ -19,9 +37,10 @@
       align-items: center;
       
       input {
-        display: inline-block;
+        display: block;
         width: 20%;
         height: 1%;
+        box-sizing: border-box;
         font-size: small;
         margin: 0.4rem 0;
         padding: 0.75rem;

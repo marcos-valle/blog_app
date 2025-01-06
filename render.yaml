@@ -1,12 +1,12 @@
 databases:
-  - name: blog_app
-    databaseName: blog_app
+  - name: blogapp
+    databaseName: blogapp
     user: postgres
     plan: free
 
 services:
   - type: web
-    name: blog_app
+    name: blogapp
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"

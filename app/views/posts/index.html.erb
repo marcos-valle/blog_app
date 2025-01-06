@@ -3,15 +3,20 @@
 <% content_for :title, "Blog" %>
 
 <div class="pageTitle">
-  <h1>Resenhas</h1>
+  <h1>Publicações</h1>
 </div>
 
 <div class="posts">
   <!-- Paginação (3 posts por página) -->
+  <% if params[:tag_names] %>
+    <h2>Filtrando por tag: <%= params[:tag_names] %></h2>
+  <% end %>
+
   <% @posts.page(params[:page]).per(3).each do |post| %>
   <div class="post">
     <!-- Criando um link no título para o post -->
     <h2 class="postTitle"><%= link_to post.title, post_path(post) %></h2>
+    <p>Tags: <%= post.tags.map(&:name).join(", ") %></p>
     <!-- Exibindo o conteúdo do post em até 150 caracteres -->
     <p class="truncateContent"><%= truncate(post.content, length: 150) %></p>
     <!-- Criando um link no 'leia mais' para o post -->

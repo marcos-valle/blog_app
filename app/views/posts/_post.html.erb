@@ -14,6 +14,12 @@
       <strong>Publicado em:</strong>
       <%= post.created_at.strftime("%d/%m/%Y") %>
     </p>
+
+    <p>
+      <% if post.tags.any? %>
+        <strong>Tags:</strong> <%= @post.tags.map(&:name).join(", ") %>
+      <% end %>
+    </p>
   </div>
 
   <p>

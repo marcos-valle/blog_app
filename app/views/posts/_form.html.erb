@@ -19,15 +19,20 @@
     <div class="text">
       <%= form.textarea :content, placeholder: "Digite o conteúdo" %>
     </div>
+
+    <div class="postFormTags">
+      <%= text_field_tag :tag_names, @post.persisted? ? @post.tags.map(&:name).join(", ") : nil, placeholder: "Tags (separadas por vírgula)" %>
+    </div>
+
     <% if user_signed_in? %>
       <div>
-        <%= form.hidden_field :current_user_id, value: current_user.id %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.hidden_field :username, value: current_user.username %>
       </div>
     <% end %>
 
     <div class="postButton">
-      <%= form.submit "Criar post" %>
+      <%= form.submit "Salvar" %>
     </div>
   <% end %>
 </section>

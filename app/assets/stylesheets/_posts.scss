@@ -11,6 +11,7 @@
   }
   
   .postPage {
+
     h1 {
       text-align: center;
       color: var(--title-primary);
@@ -20,6 +21,9 @@
     }
     
     .postsInfo {
+      display: flex;
+      flex-direction: column;
+      
       p {
         text-align: center;
         color: var(--text-gray-sec);
@@ -60,3 +64,4 @@
       }
   }
 }
+

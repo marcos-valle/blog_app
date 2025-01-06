@@ -3,8 +3,11 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    # Limita a 3 posts por página e ordena a partir do mais recente
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
+    if params[:tag_names]
+      @posts = Post.joins(:tags).where(tags: { name: params[:tag_names] })
+    else
+      @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -26,7 +29,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
+        update_tags(@post)
+        format.html { redirect_to @post, notice: "Post criado com sucesso." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +43,8 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: "Post was successfully updated." }
+        update_tags(@post)
+        format.html { redirect_to @post, notice: "Post atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +58,7 @@ class PostsController < ApplicationController
     @post.destroy!
 
     respond_to do |format|
-      format.html { redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed." }
+      format.html { redirect_to posts_path, status: :see_other, notice: "Post deletado com sucesso." }
       format.json { head :no_content }
     end
   end
@@ -69,7 +74,23 @@ class PostsController < ApplicationController
       if current_user
         params[:post][:user_id] = current_user.id
         params[:post][:username] = current_user.username
+        params[:tag_names] = update_tags(@post)
       end
-      params.expect(post: [ :title, :content, :user_id, :username ])
+      params.require(:post).permit(:title, :content, :user_id, :username)
+    end
+
+    def update_tags(post)
+      logger.debug "Tags recebidas: #{params[:post][:tags]}"
+      tags = params[:tag_names]
+
+      if tags.is_a?(String)
+        tags = tags.split(",").map(&:strip).uniq
+      elsif tags.is_a?(Array)
+        tags = tags.map(&:strip).uniq
+      end
+      post.tags.clear
+      tags.each do |tag|
+        post.tags << Tag.find_or_create_by(name: tag)
+      end
     end
 end

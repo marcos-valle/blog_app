@@ -1,10 +1,10 @@
 <section class="sessionSection">
+  <div class= "errorMsg">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+  </div>
+  
   <h2>Edite a sua conta</h2>
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    
     <div class="field">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"e-mail" %>
     </div>

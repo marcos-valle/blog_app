@@ -3,8 +3,13 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    if params[:tag_names]
-      @posts = Post.joins(:tags).where(tags: { name: params[:tag_names] })
+    if params[:tag_names].present?
+      @posts = Post.joins(:tags)
+        .where(tags: { name: params[:tag_names] })
+        .distinct
+        .order(created_at: :desc)
+        .page(params[:page])
+        .per(3)
     else
       @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
     end
@@ -56,7 +61,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy!
-
     respond_to do |format|
       format.html { redirect_to posts_path, status: :see_other, notice: "Post deletado com sucesso." }
       format.json { head :no_content }

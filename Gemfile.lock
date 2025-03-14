@@ -175,8 +175,9 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     mini_mime (1.1.5)
-    minitest (5.25.4)
-    minitest-utils (0.4.8)
+    minitest (5.25.5)
+    minitest-utils (0.5.8)
+      benchmark
       minitest
     msgpack (1.7.5)
     net-imap (0.5.4)
